@@ -75,12 +75,15 @@ class PostController extends Controller
         $post -> content = $request -> input (' content ');
         $post -> save ();
         $post -> tags ()-> attach ( $request -> input ('tags ') === null ? [] : $request -> input ('tags '));
+        $post -> tags ()-> sync ( $request -> input ('tags ') === null ? [] : $request -> input ('tags '));
         return redirect ()-> route (' admin .index ')->with ('info ', 'Post edited , new Title is: ' . $request -> input ('title '));
     }
     
     public function getAdminDelete ( $id )
    {
         $post = Post :: find ( $id );
+        $post -> likes ()-> delete ();
+        $post -> tags ()-> detach ();
         $post -> delete ();
         return redirect ()-> route (' admin .index ')-> with ('info ', 'Post deleted ! ');
    }
