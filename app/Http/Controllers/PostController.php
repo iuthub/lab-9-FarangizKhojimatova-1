@@ -38,7 +38,8 @@ class PostController extends Controller
     
     public function getAdminCreate()
     {
-        return view('admin.create');
+        $tags = Tag :: all ();
+        return view (' admin . create ', ['tags ' => $tags ]);
     }
 
     public function getAdminEdit($id)
@@ -72,8 +73,8 @@ class PostController extends Controller
         $post -> title = $request -> input ('title ');
         $post -> content = $request -> input (' content ');
         $post -> save ();
-        return redirect ()-> route (' admin .index ')
-                ->with ('info ', 'Post edited , new Title is: ' . $request -> input ('title '));
+        $post -> tags ()-> attach ( $request -> input ('tags ') === null ? [] : $request -> input ('tags '));
+        return redirect ()-> route (' admin .index ')->with ('info ', 'Post edited , new Title is: ' . $request -> input ('title '));
     }
     
     public function getAdminDelete ( $id )
