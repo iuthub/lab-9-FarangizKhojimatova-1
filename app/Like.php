@@ -10,3 +10,4 @@ class Like extends Model
     	return $this->belongsTo("App\Post",'post_id');
     }
 }
+
