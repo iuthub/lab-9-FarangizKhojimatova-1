@@ -31,4 +31,3 @@ class CreatePostsTable extends Migration
         Schema::drop('posts');
     }
 }
-
