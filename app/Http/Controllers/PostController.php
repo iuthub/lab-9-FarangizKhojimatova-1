@@ -45,7 +45,8 @@ class PostController extends Controller
     public function getAdminEdit($id)
     {
         $post = Post :: find ( $id );
-        return view (' admin .edit ', ['post ' => $post , 'postId ' => $id ]);
+        $tags = Tag :: all ();
+        return view (' admin .edit ', ['post ' => $post , 'postId ' => $id , 'tags ' => $tags ]);
     }
 
     public function postAdminCreate(Request $request)
